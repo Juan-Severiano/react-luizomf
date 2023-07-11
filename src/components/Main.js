@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { BiPlus } from 'react-icons/bi'
+import { BiPlus, BiRestaurant } from 'react-icons/bi'
 
 import { BiPencil, BiTrash } from 'react-icons/bi'
 import './Main.css'
@@ -8,14 +8,27 @@ import './Main.css'
 export default class Main extends Component {
     state = {
         newTask: '',
-        tasks : [
-            'fazer café', 'comer alguem', 'terminar a desgraça desse curso'
-        ]
+        tasks : []
     }
 
     handleChange = e => {
         this.setState({
             newTask: e.target.value
+        })
+    }
+
+    handleSubmit = e => {
+        e.preventDefault()
+        const { tasks } = this.state
+        let { newTask } = this.state
+        newTask = newTask.trim()
+
+        if (tasks.indexOf(newTask) !== -1) return
+
+        const newTasks = [ ...tasks]
+
+        this.setState({
+            tasks : [ ...newTasks, newTask],
         })
     }
 
@@ -27,7 +40,7 @@ export default class Main extends Component {
             <div className='container main'>
                 <h1>Lista de tarefas</h1>
 
-                <form action="#" className='form'>
+                <form action="#" className='form' onSubmit={this.handleSubmit}>
                     <input
                     onChange={this.handleChange}
                     type="text"
@@ -41,10 +54,10 @@ export default class Main extends Component {
                 <ul className="tasks">
                     {tasks.map((task) => (
                         <li key={task}>{task}
-                         <div>
+                         <span>
                             <BiPencil className='edit' />
                             <BiTrash className='delete'/>
-                         </div>
+                         </span>
                         </li>
                     ))}
                 </ul>

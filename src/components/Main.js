@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { BiPlus, BiRestaurant } from 'react-icons/bi'
+import { BiPlus } from 'react-icons/bi'
 
 import { BiPencil, BiTrash } from 'react-icons/bi'
 import './Main.css'
@@ -32,6 +32,20 @@ export default class Main extends Component {
         })
     }
 
+    deleteTask = (e, index) => {
+      const { tasks } = this.state
+      const newTasks = [ ...tasks]
+
+      newTasks.splice(index, 1)
+
+      this.setState({
+        tasks : [ ...newTasks],
+    })
+    }
+
+    editTask = (e, index) => {
+
+    }
 
     render() {
         const { newTask, tasks } = this.state
@@ -52,11 +66,11 @@ export default class Main extends Component {
                 </form>
 
                 <ul className="tasks">
-                    {tasks.map((task) => (
+                    {tasks.map((task, index) => (
                         <li key={task}>{task}
                          <span>
-                            <BiPencil className='edit' />
-                            <BiTrash className='delete'/>
+                            <BiPencil className='edit' onClick={e => this.editTask(e, index)} />
+                            <BiTrash className='delete' onClick={e => this.deleteTask(e, index)}/>
                          </span>
                         </li>
                     ))}

@@ -7,6 +7,7 @@
 
 .main h1 {
   font-size: 20px;
+  font-weight: 800;
   text-align: center;
   padding-bottom: 20px;
 }
@@ -36,4 +37,43 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.tasks {
+  margin-top: 30px;
+}
+
+.tasks li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  transition: all 600ms ease-in-out;
+  border-radius: 10px;
+}
+
+.tasks li:hover {
+  background-color: #51c5de;
+}
+
+.tasks li .edit {
+  color: #51c5de;
+}
+
+.tasks li .delete {
+  color: #f04c64;
+}
+
+.tasks li .edit, .tasks li .delete {
+  margin-right: 15px;
+}
+
+.tasks li .edit:hover, .tasks li .delete:hover{
+  cursor: pointer;
+}
+
+.tasks li:hover .edit,
+.tasks li:hover .delete {
+  transition: all 600ms ease-in-out;
+  color: black;
 }
